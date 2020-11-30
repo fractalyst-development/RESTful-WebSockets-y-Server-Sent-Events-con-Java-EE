@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SSE </title>
+        <script type="text/JavaScript">
+            
+            function startSSEConnection(){
+                var source = new EventSource('sse/test');
+                source.addEventListener("message-to-client", function(event){                    
+                    document.getElementById("msg").innerHTML=event.data;
+                });                               
+            }          
+        </script>
+    </head>
+    <body onload="startSSEConnection();">
+        <div id="msg"></div>
+    </body>        
+</html>

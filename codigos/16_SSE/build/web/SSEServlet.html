@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SSE EventSource</title>
+        <script type="text/JavaScript">
+            
+            function startSSEConnection(){
+                var source = new EventSource('SSEServlet');
+                source.addEventListener("server-time", function(event){                    
+                    document.getElementById("server-time").innerHTML=event.data;
+                });                               
+            }       
+            function otro(){
+                var source = new EventSource('SSEServlet');
+                source.addEventListener("otro-evento", function(event){                    
+                    document.getElementById("otro").innerHTML=event.data;
+                });                               
+            }    
+        </script>
+    </head>
+    <body onload="startSSEConnection();otro();">
+        <div id="server-time">[Server-Time]</div>
+        <div id="otro">[otro]</div>
+    </body>        
+</html>

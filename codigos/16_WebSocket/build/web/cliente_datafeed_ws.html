@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WebSocket Cliente</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    </head>
+    <body onload="setup();">
+        <h1>WebSocket Datos Din&aacute;micos</h1>
+        <div>Cliente de datos din&aacute;micos</div>
+        No. <label id="num">0</label><br>
+        Valor. <label id="val">0</label>
+        <br><div id="info"></div>
+        <button onclick="enviar();">Actualiza</button>
+        <button type="button" id="cerrar" onclick="cerrar();">Cerrar</button>
+
+        <script>
+
+            var ws;
+            function setup() {
+                ws = new WebSocket("ws://localhost:7001/16_WebSocket/data-feed");
+                //
+                ws.onmessage = function (evt) {
+                    muestraData(evt.data);
+                };
+            }
+            //
+            function enviar() {
+                ws.send("dummy");
+            }
+
+            function cerrar() {
+                ws.close();
+            }
+            function muestraData(_data) {
+                var objJson = eval("(" + _data + ")");
+                document.getElementById("num").innerHTML = objJson.indice;
+                document.getElementById("val").innerHTML = objJson.valor;
+            }
+        </script>
+    </body>
+</html>
