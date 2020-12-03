@@ -1,6 +1,7 @@
 package curso.rest.servicios;
 
 import curso.rest.dominio.Cliente;
+import curso.rest.dominio.RespuestaCliente;
 import curso.rest.dominio.dao.ClienteDAO;
 import java.net.URI;
 import java.util.List;
@@ -8,6 +9,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -52,8 +54,15 @@ public class RecursoCliente {
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public Cliente consultaCliente(@PathParam("id") int id) {
-        return dao.consultaCliente(id);
+    public RespuestaCliente obtenCliente(@PathParam("id") int id) {
+        RespuestaCliente res = new RespuestaCliente();
+        Cliente c = dao.consultaCliente(id);
+        if (c != null) {
+            res.setData(c);
+        } else {
+            throw new NotFoundException("MENSAJE");
+        }
+        return res;
     }
 
     final String TAMANHIO = "5";

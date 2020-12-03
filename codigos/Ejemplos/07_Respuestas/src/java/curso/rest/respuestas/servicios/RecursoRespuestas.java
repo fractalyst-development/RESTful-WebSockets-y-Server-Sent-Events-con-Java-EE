@@ -15,6 +15,7 @@ import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import curso.rest.respuestas.dominio.Cliente;
+import javax.ws.rs.core.MediaType;
 
 @Path("/respuestas")
 
@@ -51,6 +52,38 @@ public class RecursoRespuestas {
         NewCookie cookie = new NewCookie("nombreCookie", "valorCookie");
         ResponseBuilder builder = Response.ok("Hola NewCookie", "text/plain");
         return builder.cookie(cookie).build();
+    }
+
+    @GET
+    @Path("/test2")
+    public Response test2() {
+
+        throw new WebApplicationException(Response
+                .status(400)
+                .type(MediaType.TEXT_PLAIN)
+                .entity("Invalid state transition")
+                .build());
+    }
+
+    @GET
+    @Path("/test3")
+    public Response test3() {
+
+//        throw new WebApplicationException(Response.ok().type(MediaType.TEXT_PLAIN)
+//                .entity("Invalid state sdfsdfsdf")
+//                .build());
+        throw new NotFoundException(Response.ok().type(MediaType.TEXT_PLAIN)
+                .entity("Invalid state sdfsdfsdf")
+                .build());
+   
+        
+
+    }
+
+    @GET
+    @Path("/test4")
+    public Response test4() {
+        throw new WebApplicationException();
     }
 
     @GET
