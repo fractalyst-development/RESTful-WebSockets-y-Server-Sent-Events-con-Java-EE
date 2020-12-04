@@ -24,14 +24,13 @@ public class ClienteREST {
 
     public static void main(String[] args) {
         ClienteREST ref = new ClienteREST();
-        //ref.getCondicional();
-        ref.putCondicional();
+        ref.getCondicional();
+        //ref.putCondicional();
     }
 
     public void getCondicional() {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(URL_BASE);
-
         // ObtenCliente
         Response respuesta = target.path("/clientes/condicional/" + ID_CLIENTE)
                 .request(MediaType.APPLICATION_JSON)
@@ -41,7 +40,7 @@ public class ClienteREST {
             EntityTag etag = respuesta.getEntityTag();
             System.out.println("CLIENTE ORIGINAL: " + respuesta.getStatus() + ": " + clienteOriginal.getNombre() + "/" + clienteOriginal.getNombre().length());
             // Actualización normal
-            //this.actualizaEnOtroHilo();
+            this.actualizaEnOtroHilo();
             try {
                 Thread.sleep(500);
             } catch (InterruptedException ex) {
@@ -58,7 +57,6 @@ public class ClienteREST {
             } else if (respuesta.getStatus() == 304) {
                 System.out.println("304: No modificado");
             }
-
         }
         respuesta.close();
         client.close();

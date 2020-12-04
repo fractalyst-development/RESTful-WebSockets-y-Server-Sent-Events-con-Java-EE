@@ -105,7 +105,7 @@ public class RecursoCliente {
         Cliente c = dao.consultaCliente(id);
 
         if (c != null) {
-            EntityTag etag = new EntityTag(Integer.toString(c.hashCode()));
+            EntityTag etag = new EntityTag(Integer.toString(c.getNombre().length()));
             ResponseBuilder rb = request.evaluatePreconditions(etag);
             if (rb == null) {   // 200
                 rb = Response.ok(c);

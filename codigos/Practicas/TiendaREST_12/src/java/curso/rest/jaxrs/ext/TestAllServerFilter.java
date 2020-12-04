@@ -17,6 +17,7 @@ public class TestAllServerFilter implements ContainerRequestFilter, ContainerRes
 
     @Override
     public void filter(ContainerRequestContext requestContext) {
+        //requestContext.
         requestContext.setMethod("GET");
     }
 
