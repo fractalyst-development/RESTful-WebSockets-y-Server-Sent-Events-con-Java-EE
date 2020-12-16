@@ -34,8 +34,7 @@ public class RecursoCliente {
         if (cliente == null) {
             throw new NotFoundException();
         }
-        Response resp = Response.
-                ok(cliente).build();
+        Response resp = Response.ok(cliente).build();
         return resp;
     }
 
